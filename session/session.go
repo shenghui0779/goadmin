@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/sessions"
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 	"github.com/pkg/errors"
 
 	"github.com/iiinsomnia/goadmin/models"

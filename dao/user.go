@@ -7,7 +7,7 @@ import (
 
 	"github.com/iiinsomnia/goadmin/models"
 
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 	"github.com/jinzhu/gorm"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"

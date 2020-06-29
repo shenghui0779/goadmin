@@ -6,7 +6,7 @@ import (
 	"github.com/iiinsomnia/goadmin/dao"
 	"github.com/iiinsomnia/goadmin/helpers"
 
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 )
 
 type PasswordChange struct {

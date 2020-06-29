@@ -10,7 +10,7 @@ import (
 
 	"time"
 
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 )
 
 type UserList struct {

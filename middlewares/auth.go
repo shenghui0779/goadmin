@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 	"go.uber.org/zap"
 
 	"github.com/iiinsomnia/goadmin/consts"

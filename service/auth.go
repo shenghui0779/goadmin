@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 	"github.com/mojocn/base64Captcha"
 
 	"github.com/iiinsomnia/goadmin/consts"

@@ -9,7 +9,7 @@ import (
 	"runtime"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iiinsomnia/yiigo/v4"
+	"github.com/shenghui0779/yiigo"
 	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"
 )
