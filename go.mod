@@ -13,11 +13,14 @@ require (
 	github.com/facebookgo/stats v0.0.0-20151006221625-1b76add642e4 // indirect
 	github.com/facebookgo/subset v0.0.0-20200203212716-c811ad88dec4 // indirect
 	github.com/gin-gonic/gin v1.6.3
-	github.com/gorilla/sessions v1.2.0
-	github.com/jinzhu/gorm v1.9.13-0.20200305064831-7ea143b5484f
-	github.com/jmoiron/sqlx v1.2.1-0.20200324155115-ee514944af4b
+	github.com/gorilla/sessions v1.2.1
+	github.com/jinzhu/gorm v1.9.16
+	github.com/jmoiron/sqlx v1.2.1-0.20200615141059-0794cb1f47ee
+	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/mojocn/base64Captcha v1.3.1
-	github.com/pkg/errors v0.8.1
-	github.com/shenghui0779/yiigo v1.0.0
+	github.com/pkg/errors v0.9.1
+	github.com/shenghui0779/yiigo v1.0.3
 	go.uber.org/zap v1.15.0
 )
