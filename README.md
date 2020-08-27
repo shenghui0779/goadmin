@@ -1,7 +1,6 @@
 # goadmin
 
 [![golang](https://img.shields.io/badge/Language-Go-green.svg?style=flat)](https://golang.org)
-[![GitHub release](https://img.shields.io/github/release/IIInsomnia/goadmin.svg)](https://github.com/iiinsomnia/goadmin/releases/latest)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Go开发后台管理系统，将前端资源一起编译，是不是很酷？！
@@ -13,7 +12,7 @@ Go开发后台管理系统，将前端资源一起编译，是不是很酷？！
 ## Features
 
 - 页面布局：[ElementUI](https://element.eleme.cn/#/zh-CN)
-- Go开发库：[yiigo](https://github.com/iiinsomnia/yiigo)
+- Go开发库：[yiigo](https://github.com/shenghui0779/yiigo)
 - 编译前端资源：[go.rice](https://github.com/GeertJohan/go.rice)
 
 ## Requirements
