@@ -7,10 +7,10 @@ import (
 
 	"github.com/iiinsomnia/goadmin/models"
 
-	"github.com/shenghui0779/yiigo"
 	"github.com/jinzhu/gorm"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
+	"github.com/shenghui0779/yiigo"
 )
 
 type User struct {
@@ -69,8 +69,8 @@ func (u *User) FindList(params *UserQuery) ([]*models.User, error) {
 	binds := make([]interface{}, 0, 4)
 
 	if params.Name != "" {
-		where = append(where, "`name` = ?")
-		binds = append(binds, params.Name)
+		where = append(where, "`name` like "+"'%"+params.Name+"%'")
+		// binds = append(binds, params.Name)
 	}
 
 	if params.Role != 0 {
