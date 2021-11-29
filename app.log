@@ -1,0 +1,3 @@
+{"level":"panic","time":"2021-11-25 15:53:01","caller":"/Users/wangxiong/.github/goadmin/vendor/github.com/shenghui0779/yiigo/env.go:1176","msg":"yiigo: load config file error","error":"(26, 11): cannot have two dots in one float"}
+{"level":"panic","time":"2021-11-25 15:53:54","caller":"/Users/wangxiong/.github/goadmin/vendor/github.com/shenghui0779/yiigo/env.go:1176","msg":"yiigo: load config file error","error":"(26, 11): cannot have two dots in one float"}
+{"level":"panic","time":"2021-11-26 10:09:22","caller":"/Users/wangxiong/.github/goadmin/vendor/github.com/shenghui0779/yiigo/env.go:1176","msg":"yiigo: load config file error","error":"(29, 10): no value can start with _"}

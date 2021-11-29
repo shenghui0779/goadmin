@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/iiinsomnia/goadmin/consts"
 	"github.com/iiinsomnia/goadmin/helpers"
 	"github.com/iiinsomnia/goadmin/service"
@@ -60,9 +62,11 @@ func PasswordReset(c *gin.Context) {
 	}
 
 	s := &service.PasswordReset{
-		ID: helpers.Int64(c.Param("id")),
+		// ID: helpers.Int64(c.Param("id")),
 	}
+	c.ShouldBindJSON(s)
 
+	fmt.Println("s:  --------- ", s)
 	if err := s.Do(); err != nil {
 		Err(c, err)
 

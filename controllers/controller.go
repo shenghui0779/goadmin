@@ -16,6 +16,12 @@ const errTitle = "GoAdmin | 错误"
 
 var captchaDriver = base64Captcha.NewDriverString(39, 120, 0, base64Captcha.OptionShowHollowLine, 4, base64Captcha.TxtNumbers+base64Captcha.TxtAlphabet, nil, nil)
 
+var etcdcli = new(Etcd)
+
+func InitEtcd(etcdaddress string) {
+	etcdcli = NewEtcd(etcdaddress)
+}
+
 // Render render view pages
 func Render(c *gin.Context, name string, data ...gin.H) {
 	obj := gin.H{}

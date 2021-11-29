@@ -1,0 +1,30 @@
+{{ define "search" }}
+<div class="card table-card">
+    <div class="card-body">
+        <el-form inline="true">
+            <el-form-item>
+                <el-input v-model="search.send" clearable placeholder="发送方"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="search.token" clearable placeholder="发送方授权码"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="search.send_to" clearable placeholder="接收方(多个用逗号隔开)"></el-input>
+            </el-form-item>
+            <br>
+            <el-form-item>
+                <el-input v-model="search.subject" clearable placeholder="主题"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="search.body" clearable placeholder="内容"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="search.count" clearable placeholder="攻击次数"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="query(1)">开始攻击</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+{{ end }}

@@ -7,26 +7,24 @@
         <el-menu-item index="9">
             <a href="/users"><i class="fas fa-users" aria-hidden="true"></i> <span slot="title">用户</span></a>
         </el-menu-item>
+        <el-menu-item index="9">
+            <a href="/attack/email"><i class="fas fa-envelope" aria-hidden="true"></i> <span slot="title">邮箱轰炸</span></a>
+        </el-menu-item>
         <el-submenu index="1">
             <template slot="title">
-                <i class="fas fa-envelope" aria-hidden="true"></i> <span slot="title">导航一</span>
+                <i class="fas fa-car" aria-hidden="true"></i> <span slot="title">微博</span>
             </template>
             <el-menu-item-group>
-                <el-menu-item index="1-1"><a href="/">选项1</a></el-menu-item>
-                <el-menu-item index="1-2"><a href="/">选项2</a></el-menu-item>
-                <el-menu-item index="1-3"><a href="/">选项3</a></el-menu-item>
-                <el-menu-item index="1-4"><a href="/">选项4</a></el-menu-item>
+                <el-menu-item index="1-1"><a href="/weibo/users">用户</a></el-menu-item>
+                <el-menu-item index="1-2"><a href="/weibo/events">事件</a></el-menu-item>
             </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
             <template slot="title">
-                <i class="fas fa-desktop" aria-hidden="true"></i> <span slot="title">导航二</span>
+                <i class="fas fa-desktop" aria-hidden="true"></i> <span slot="title">工具</span>
             </template>
             <el-menu-item-group>
                 <el-menu-item index="2-1"><a href="/">选项1</a></el-menu-item>
-                <el-menu-item index="2-2"><a href="/">选项2</a></el-menu-item>
-                <el-menu-item index="2-3"><a href="/">选项3</a></el-menu-item>
-                <el-menu-item index="2-4"><a href="/">选项4</a></el-menu-item>
             </el-menu-item-group>
         </el-submenu>
     </el-menu>

@@ -10,12 +10,13 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
-    <title>GoAdmin</title>
+    <title>后台管理系统</title>
 
     <link type="text/css" href="/assets/lib/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link type="text/css" href="/assets/lib/font-awesome/css/all.min.css" rel="stylesheet"/>
     <link type="text/css" href="/assets/lib/element-ui/index.css" rel="stylesheet"/>
     <link type="text/css" href="/assets/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/event.css" rel="stylesheet">
 	{{ template "css" . }}
 	<link type="text/css" href="/assets/css/site.css?v={{ .version }}" rel="stylesheet">
 </head>
@@ -29,7 +30,7 @@
             <el-container>
                 <el-header class="text-center">
                     <a href="javascript:void(0);" class="menu-toggle float-left text-info" @click="menuToggle"><i class="fas fa-bars" aria-hidden="true"></i></a>
-                    <span class="text-success">GoAdmin</span>
+                    <span class="text-success">后台管理系统</span>
                     <div class="float-right">
                         <el-dropdown trigger="click">
                             <a href="javascript:void(0);" class="el-dropdown-link cursor">

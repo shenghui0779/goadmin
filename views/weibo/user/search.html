@@ -1,0 +1,17 @@
+{{ define "search" }}
+<div class="card table-card">
+    <div class="card-body">
+        <el-form inline="true">
+            <el-form-item>
+                <el-button type="success" @click="add">新增</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="search.name" clearable placeholder="用户名"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="query(1)">查询</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+{{ end }}

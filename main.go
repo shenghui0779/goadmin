@@ -5,15 +5,15 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/facebookgo/grace/gracehttp"
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"github.com/iiinsomnia/goadmin/assets"
+	"github.com/iiinsomnia/goadmin/controllers"
 	"github.com/iiinsomnia/goadmin/middlewares"
 	"github.com/iiinsomnia/goadmin/routes"
 	"github.com/iiinsomnia/goadmin/session"
 	"github.com/iiinsomnia/goadmin/views"
-
-	"github.com/facebookgo/grace/gracehttp"
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
 	"github.com/shenghui0779/yiigo"
 	"go.uber.org/zap"
 )
@@ -42,7 +42,12 @@ func run() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	r := gin.New()
+	etcdaddress := yiigo.Env("etcd.address").String()
+
+	// 连接 etcd
+	go controllers.InitEtcd(etcdaddress)
+
+	r := gin.Default()
 
 	r.Use(middlewares.Error())
 

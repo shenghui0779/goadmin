@@ -1,13 +1,14 @@
 package service
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/shenghui0779/yiigo"
 	"github.com/mojocn/base64Captcha"
+	"github.com/shenghui0779/yiigo"
 
 	"github.com/iiinsomnia/goadmin/consts"
 	"github.com/iiinsomnia/goadmin/dao"
@@ -39,7 +40,10 @@ func (l *Login) Do(c *gin.Context) error {
 	}
 
 	// 账号密码验证
-	if user == nil || yiigo.MD5(l.Password+user.Salt) != user.Password {
+
+	fmt.Println("l.Password: ", l.Password)
+	fmt.Println("user.Password: ", user.Password)
+	if user == nil || l.Password != user.Password {
 		return helpers.Error(helpers.ErrAuth)
 	}
 

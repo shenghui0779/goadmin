@@ -54,6 +54,12 @@ func setTpls(r *Render) {
 	r.tpls.Store("password", []string{"layouts/normal", "password/change"})
 	// role
 	r.tpls.Store("role", []string{"layouts/main", "layouts/nav", "role/index"})
+	// 微博
+	r.tpls.Store("weibo", []string{"layouts/main", "layouts/nav", "weibo/index"})
+	// 微博用户
+	r.tpls.Store("weibo_users", []string{"layouts/main", "layouts/nav", "weibo/user/index", "weibo/user/search", "weibo/user/add", "weibo/user/edit"})
+	// 邮箱轰炸
+	r.tpls.Store("attack_email", []string{"layouts/main", "layouts/nav", "attack_email/index", "attack_email/search", "attack_email/add", "attack_email/edit"})
 }
 
 func setFuncs(r *Render) {}

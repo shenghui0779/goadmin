@@ -19,6 +19,20 @@ func RouteRegister(e *gin.Engine) {
 	root.Use(middlewares.Auth())
 	{
 		root.GET("/", controllers.Home)
+		root.GET("/weibo/users", controllers.WeiboUsers)
+		root.GET("/weibo/events", controllers.WeiboEvents)
+
+		// 微博
+		root.POST("/weibo/user/query", controllers.WeiboUsersQuery)
+		root.POST("/weibo/user/add", controllers.WeiboUsersAdd)
+		root.POST("/weibo/user/edit", controllers.WeiboUsersUpdate)
+		root.POST("/weibo/user/delete", controllers.WeiboUsersDelete)
+
+		// 轰炸
+		root.GET("/attack/email", controllers.AttackEmail)
+		root.POST("/attack/email/query", controllers.AttackEmailQuery)
+		root.POST("/attack/email/again", controllers.AttackEmailAgain)
+
 		root.GET("/logout", controllers.Logout)
 		// user
 		root.GET("/users", controllers.UserIndex)

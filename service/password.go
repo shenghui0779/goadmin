@@ -37,14 +37,12 @@ type PasswordReset struct {
 }
 
 func (p *PasswordReset) Do() error {
-	defaultPass := yiigo.Env("app.default_pass").String("123")
-	salt := buildSalt()
+	defaultPass := yiigo.Env("app.default_pass").String()
 
 	userDao := dao.NewUser()
 
 	if err := userDao.UpdateByID(p.ID, yiigo.X{
-		"password":  yiigo.MD5(defaultPass + salt),
-		"salt":      salt,
+		"password":  defaultPass,
 		"update_at": time.Now().Unix(),
 	}); err != nil {
 		return helpers.Error(helpers.ErrSystem, err)

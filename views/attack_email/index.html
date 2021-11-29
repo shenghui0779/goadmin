@@ -1,0 +1,41 @@
+{{ define "css" }}{{ end }}
+
+{{ define "breadcrumb" }}
+<el-breadcrumb separator="/" class="mb-3">
+    <!-- <el-breadcrumb-item><a href="/">轰炸</a></el-breadcrumb-item> -->
+    <!-- <el-breadcrumb-item>用户</el-breadcrumb-item> -->
+</el-breadcrumb>
+{{ end }}
+
+{{ define "content" }}
+    {{ template "search" . }}
+    <div class="card table-card mb-3">
+        <div class="card-body" v-loading="loading.search">
+            <el-table :data="list.data" border>
+                <el-table-column prop="create_at" label="时间"></el-table-column>
+                <el-table-column prop="send" label="发送方"></el-table-column>
+                <el-table-column prop="send_to" label="接收方"></el-table-column>
+                <el-table-column prop="count" label="次数"></el-table-column>
+                <el-table-column fixed="right" label="操作" width="200">
+                    <template slot-scope="scope">
+                        <el-button type="danger" size="mini" plain @click="del(scope.$index, scope.row)">再次攻击</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div class="card-footer">
+            <el-pagination v-if="list.count > 0" background @size-change="sizeChange" @current-change="query" :current-page="search.page" :page-sizes="[10, 20, 50, 100]" :page-size="search.size" layout="total, sizes, prev, pager, next, jumper" :total="list.count"></el-pagination>
+        </div>
+    </div>
+
+    {{ template "add" . }}
+    {{ template "edit" . }}
+{{ end }}
+
+{{ define "js" }}
+<script type="text/javascript" src="/assets/js/attack_email.js?v={{ .version }}"></script>
+{{ end }}
+
+ {{ define "attack_email" }}
+	{{ template "main" . }}
+ {{ end }}

@@ -146,6 +146,7 @@ func (u *User) Add(data *UserAddData) error {
 }
 
 func (u *User) UpdateByID(id int64, data yiigo.X) error {
+	fmt.Println("data: ", data)
 	query, binds := yiigo.UpdateSQL("UPDATE `go_user` SET ? WHERE `id` = ?", data, id)
 
 	if _, err := u.db.Exec(query, binds...); err != nil {

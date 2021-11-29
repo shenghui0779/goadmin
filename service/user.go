@@ -85,7 +85,7 @@ func (u *UserList) Do() (*reply.UserListReply, error) {
 
 		switch v.Role {
 		case consts.SuperManager:
-			item.RoleName = "超级管理员"
+			item.RoleName = "xxxxxxx"
 		case consts.SeniorManager:
 			item.RoleName = "高级管理员"
 		case consts.GeneralManger:

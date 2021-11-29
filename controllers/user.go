@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/iiinsomnia/goadmin/consts"
 	"github.com/iiinsomnia/goadmin/helpers"
 	"github.com/iiinsomnia/goadmin/service"
@@ -123,6 +125,7 @@ func UserDelete(c *gin.Context) {
 
 	s := &service.UserDelete{ID: helpers.Int64(c.Param("id"))}
 
+	fmt.Println("UserDelete: ", s)
 	if err := s.Do(); err != nil {
 		Err(c, err)
 
