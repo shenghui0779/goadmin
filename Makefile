@@ -6,6 +6,5 @@ build:
 
 git:
 	git add -A
-	time=$(date "+%Y/%m/%d %H:%M:%S")
-	git commit -m $time
+	git commit -m "echo $(date '+%Y-%m-%d %H:%M:%S')" 
 	git push origin dev
