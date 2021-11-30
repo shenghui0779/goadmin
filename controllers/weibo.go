@@ -123,7 +123,7 @@ func WeiboUsersQuery(c *gin.Context) {
 	for _, q := range querys {
 		rows, err := db.Query(q)
 		if err != nil {
-			fmt.Println("err: ", err)
+			log.Error(err)
 			return
 		}
 		defer rows.Close()
@@ -133,7 +133,7 @@ func WeiboUsersQuery(c *gin.Context) {
 			var fans, follows, weibo_count float64
 			err := rows.Scan(&name, &nickname, &uid, &fans, &follows, &watch, &weibo_count, &description, &location)
 			if err != nil {
-				fmt.Println("err: ", err)
+				log.Error(err)
 			}
 
 			data := new(WeiboUserListItem)
@@ -207,6 +207,7 @@ func WeiboUsersUpdate(c *gin.Context) {
 	_, err := db.Exec(sql)
 	if err != nil {
 		Err(c, err, "更新失败")
+		log.Error("err: ", err)
 		return
 	}
 

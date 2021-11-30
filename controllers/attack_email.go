@@ -101,8 +101,8 @@ func (s *attackEmailItem) send() error {
 	mailConn := map[string]string{
 		"user": s.Send,
 		"pass": s.Token,
-		"host": "smtp.qq.com",
-		"port": "25",
+		"host": yiigo.Env("email.host").String(),
+		"port": yiigo.Env("email.port").String(),
 	}
 
 	var mailTo []string
