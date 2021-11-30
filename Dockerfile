@@ -5,7 +5,7 @@ COPY . .
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GOFLAGS=-mod=vendor go build -o goadmin main.go
 
 # =============================================================================
-FROM alpine:3.9 AS final
+FROM centos AS final
 
 # RUN apk add --no-cache tzdata
 ENV TZ=Asia/Shanghai
@@ -22,4 +22,4 @@ COPY ./assets/ ./assets/
 RUN chmod +x goadmin
 
 # ENTRYPOINT ["/app/goadmin"]
-ENTRYPOINT ["sleep 1000s"]
+ENTRYPOINT ["top"]
