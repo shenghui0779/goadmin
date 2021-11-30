@@ -76,10 +76,23 @@ func WeiboEvents(c *gin.Context) {
 		count = len(events)
 	}
 
+	events = inverSlice(events)
+	if count > 100 {
+		events = events[:100]
+	}
+
 	Render(c, "weibo", gin.H{
 		"events": events,
 		"count":  count,
 	})
+
+}
+
+func inverSlice(s []string) []string {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+	return s
 }
 
 func WeiboUsers(c *gin.Context) {
