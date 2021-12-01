@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"math/rand"
 	"strings"
 	"time"
@@ -41,13 +40,15 @@ func (l *Login) Do(c *gin.Context) error {
 
 	// 账号密码验证
 
-	fmt.Println("l.Password: ", l.Password)
-	fmt.Println("user.Password: ", user.Password)
 	if user == nil || l.Password != user.Password {
 		return helpers.Error(helpers.ErrAuth)
 	}
 
 	// 更新信息
+	last_ip := c.ClientIP()
+	if last_ip == "::1" {
+		last_ip = "127.0.0.1"
+	}
 	if err = userDao.UpdateByID(user.ID, yiigo.X{
 		"last_login_ip":   c.ClientIP(),
 		"last_login_time": time.Now().Unix(),

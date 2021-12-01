@@ -179,6 +179,8 @@ func WeiboUsersAdd(c *gin.Context) {
 	u, err := queryWeiboUserInfoByUid(s)
 	if err != nil {
 		log.Error(err)
+		Err(c, err, "添加失败")
+		return
 	}
 
 	db := yiigo.DB()
