@@ -63,6 +63,13 @@ type weiboUserInfo struct {
 
 // Events ...
 func WeiboEvents(c *gin.Context) {
+	identity, err := Identity(c)
+
+	if err != nil || identity.Role != consts.SuperManager {
+		Err(c, helpers.Error(helpers.ErrForbid, err))
+		return
+	}
+
 	count := 0
 	events, err := etcdcli.GetAll("/events/")
 	if err != nil {
@@ -96,6 +103,13 @@ func inverSlice(s []string) []string {
 }
 
 func WeiboUsers(c *gin.Context) {
+	identity, err := Identity(c)
+
+	if err != nil || identity.Role != consts.SuperManager {
+		Err(c, helpers.Error(helpers.ErrForbid, err))
+		return
+	}
+
 	Render(c, "weibo_users", gin.H{"menu": "9"})
 }
 
