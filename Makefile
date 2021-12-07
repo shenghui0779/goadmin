@@ -6,3 +6,6 @@ build:
 	systemctl start goadmin
 git:
 	bash shell/git.sh
+
+backup:
+	bash shell/backup.sh
