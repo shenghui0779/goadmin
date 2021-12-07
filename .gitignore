@@ -23,3 +23,4 @@ logs
 goadmin_mac
 goadmin_linux_x64
 goadmin_win_x64
+shell/backup.sh
