@@ -41,8 +41,9 @@ type weiboUserAdd struct {
 }
 
 type weiboUserUpdate struct {
-	Name string `json:"name" valid:"required"`
-	Uid  string `json:"uid" valid:"required"`
+	Name  string `json:"name" valid:"required"`
+	Watch string `json:"watch" valid:"required"`
+	Uid   string `json:"uid" valid:"required"`
 }
 
 type watchUserDelete struct {
@@ -65,7 +66,7 @@ type weiboUserInfo struct {
 func WeiboEvents(c *gin.Context) {
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role != consts.SuperManager {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
 		return
 	}
@@ -105,7 +106,7 @@ func inverSlice(s []string) []string {
 func WeiboUsers(c *gin.Context) {
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role != consts.SuperManager {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
 		return
 	}
@@ -218,8 +219,9 @@ func WeiboUsersUpdate(c *gin.Context) {
 		log.Error("err: ", err)
 		return
 	}
+
 	db := yiigo.DB()
-	sql := fmt.Sprintf(`update weibo set name="%v" where uid="%v"`, s.Name, s.Uid)
+	sql := fmt.Sprintf(`update weibo set name="%v",watch="%v" where uid="%v"`, s.Name, s.Watch, s.Uid)
 	_, err := db.Exec(sql)
 	if err != nil {
 		Err(c, err, "更新失败")
@@ -233,7 +235,7 @@ func WeiboUsersUpdate(c *gin.Context) {
 func WeiboUsersDelete(c *gin.Context) {
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role != consts.SuperManager {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
 		return
 	}

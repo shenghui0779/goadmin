@@ -7,23 +7,15 @@
             count: 0,
             data: [],
         },
-        roles: [
+        watch: [
             {
                 "id": 1,
-                "name": "超级管理员",
+                "name": "是",
             },
             {
                 "id": 2,
-                "name": "高级管理员",
-            },
-            {
-                "id": 3,
-                "name": "普通管理员",
-            },
-            {
-                "id": 4,
-                "name": "微博",
-            },
+                "name": "否",
+            }
         ],
         user: {},
         curPage: 1,
@@ -118,6 +110,7 @@
 
             axios.post('/weibo/user/edit', {
                 name: this.user.name,
+                watch: this.user.watch,
                 uid: this.user.uid,
             }).then(function(response) {
                 vm.loading.app = false;

@@ -60,6 +60,8 @@ func setTpls(r *Render) {
 	r.tpls.Store("weibo_users", []string{"layouts/main", "layouts/nav", "weibo/user/index", "weibo/user/search", "weibo/user/add", "weibo/user/edit"})
 	// 邮箱轰炸
 	r.tpls.Store("attack_email", []string{"layouts/main", "layouts/nav", "attack_email/index", "attack_email/search", "attack_email/add", "attack_email/edit"})
+	// One摄影
+	r.tpls.Store("one", []string{"layouts/main", "layouts/nav", "one/index"})
 }
 
 func setFuncs(r *Render) {}

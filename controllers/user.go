@@ -39,15 +39,13 @@ func UserAdd(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(s); err != nil {
 		Err(c, helpers.Error(helpers.ErrParams, err))
-
 		return
 	}
 
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role == consts.GeneralManger {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
-
 		return
 	}
 
@@ -85,9 +83,14 @@ func UserEdit(c *gin.Context) {
 
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role == consts.GeneralManger {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
 
+		return
+	}
+
+	if s.ID != consts.Admin && s.ID != consts.User {
+		Err(c, helpers.Error(helpers.ErrParams, err))
 		return
 	}
 
@@ -105,6 +108,11 @@ func UserEdit(c *gin.Context) {
 		return
 	}
 
+	if s.Name == "admin" {
+		Err(c, helpers.Error(helpers.ErrForbid), "禁止修改")
+		return
+	}
+
 	if err = s.Do(); err != nil {
 		Err(c, err)
 
@@ -117,13 +125,23 @@ func UserEdit(c *gin.Context) {
 func UserDelete(c *gin.Context) {
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role != consts.SuperManager {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
 
 		return
 	}
 
-	s := &service.UserDelete{ID: helpers.Int64(c.Param("id"))}
+	// s := &service.UserDelete{ID: helpers.Int64(c.Param("id"))}
+	s := &service.UserDelete{}
+	if err := c.ShouldBindJSON(s); err != nil {
+		Err(c, helpers.Error(helpers.ErrParams, err))
+		return
+	}
+
+	if s.ID == consts.Admin {
+		Err(c, helpers.Error(helpers.ErrForbid), "禁止删除")
+		return
+	}
 
 	fmt.Println("UserDelete: ", s)
 	if err := s.Do(); err != nil {

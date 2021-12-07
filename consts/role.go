@@ -1,7 +1,6 @@
 package consts
 
 const (
-	SuperManager  = 1
-	SeniorManager = 2
-	GeneralManger = 3
+	Admin = 1
+	User  = 2
 )

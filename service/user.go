@@ -84,12 +84,12 @@ func (u *UserList) Do() (*reply.UserListReply, error) {
 		}
 
 		switch v.Role {
-		case consts.SuperManager:
-			item.RoleName = "xxxxxxx"
-		case consts.SeniorManager:
-			item.RoleName = "高级管理员"
-		case consts.GeneralManger:
-			item.RoleName = "普通管理员"
+		case consts.Admin:
+			item.RoleName = "管理员"
+		case consts.User:
+			item.RoleName = "普通用户"
+		default:
+			item.RoleName = "未知"
 		}
 
 		resp.List = append(resp.List, item)
@@ -100,22 +100,25 @@ func (u *UserList) Do() (*reply.UserListReply, error) {
 
 type UserAdd struct {
 	Name  string `json:"name" valid:"required"`
-	EMail string `json:"email" valid:"required"`
-	Role  int    `json:"role" valid:"required"`
+	EMail string `json:"email"`
 }
 
 func (u *UserAdd) Do() error {
-	defaultPass := yiigo.Env("app.default_pass").String("123")
+	defaultPass := yiigo.Env("app.default_pass").String("123456")
 
 	salt := buildSalt()
 
 	now := time.Now().Unix()
 
+	if u.EMail == "" {
+		u.EMail = "xxxxxx@xx"
+	}
+
 	data := &dao.UserAddData{
 		Name:      u.Name,
 		EMail:     u.EMail,
-		Role:      u.Role,
-		Password:  yiigo.MD5(defaultPass + salt),
+		Role:      consts.User,
+		Password:  defaultPass,
 		Salt:      salt,
 		CreatedAt: now,
 		UpdatedAt: now,

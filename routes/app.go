@@ -33,6 +33,9 @@ func RouteRegister(e *gin.Engine) {
 		root.POST("/attack/email/query", controllers.AttackEmailQuery)
 		root.POST("/attack/email/again", controllers.AttackEmailAgain)
 
+		// One
+		root.GET("/one/picture", controllers.OnePicture)
+
 		root.GET("/logout", controllers.Logout)
 		// user
 		root.GET("/users", controllers.UserIndex)

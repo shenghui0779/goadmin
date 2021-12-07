@@ -55,18 +55,26 @@ func PasswordChange(c *gin.Context) {
 func PasswordReset(c *gin.Context) {
 	identity, err := Identity(c)
 
-	if err != nil || identity.Role != consts.SuperManager {
+	if err != nil || identity.Role != consts.Admin {
 		Err(c, helpers.Error(helpers.ErrForbid, err))
-
 		return
 	}
 
 	s := &service.PasswordReset{
 		// ID: helpers.Int64(c.Param("id")),
 	}
-	c.ShouldBindJSON(s)
+	if err := c.ShouldBindJSON(s); err != nil {
+		Err(c, helpers.Error(helpers.ErrParams, err))
+		return
+	}
 
-	fmt.Println("s:  --------- ", s)
+	if s.ID == consts.Admin {
+		Err(c, helpers.Error(helpers.ErrForbid), "禁止重置")
+		return
+	}
+
+	fmt.Println("Id: ", s.ID)
+
 	if err := s.Do(); err != nil {
 		Err(c, err)
 

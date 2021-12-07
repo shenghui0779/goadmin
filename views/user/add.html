@@ -14,11 +14,11 @@
                         <el-form-item label="邮箱">
                             <el-input v-model="user.email" placeholder="邮箱"></el-input>
                         </el-form-item>
-                        <el-form-item label="角色">
+                        <!-- <el-form-item label="角色">
                             <el-select v-model="user.role" filterable placeholder="请选择角色">
                                 <el-option v-for="item in roles" :key="item.id" :label="item.name" :value="item.id"></el-option>
                             </el-select>
-                        </el-form-item>
+                        </el-form-item> -->
                         <div class="text-center mt-5">
                             <el-button @click="dialog.add = false">取消</el-button>
                             <el-button type="primary" @click="submit">提交</el-button>

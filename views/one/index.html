@@ -1,0 +1,31 @@
+{{ define "css" }}{{ end }}
+
+{{ define "breadcrumb" }}{{ end }}
+
+{{ define "content" }}
+<div class="alert alert-success" role="alert">
+    <i class="fa fa-smile-o" aria-hidden="true"></i> One
+</div>
+<div  class="my_fav_con">
+    <div>
+        <ul  class="my_fav_list">
+             {{ range .events }}
+                <li class="my_fav_list_li" id="">
+                    <a  class="my_fav_list_a" href="" target="_blank">
+                        <p>{{ . }}</p>
+                    </a>
+                    </label>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+<script type="text/javascript" src="/assets/js/home.js?v={{ .version }}"></script>
+{{ end }}
+
+{{ define "one" }}
+    {{ template "main" . }}
+{{ end }}

@@ -22,9 +22,9 @@ func (p *PasswordChange) Do() error {
 	userDao := dao.NewUser()
 
 	if err := userDao.UpdateByID(p.AuthID, yiigo.X{
-		"password":  yiigo.MD5(p.Password + salt),
-		"salt":      salt,
-		"update_at": time.Now().Unix(),
+		"password":   yiigo.MD5(p.Password + salt),
+		"salt":       salt,
+		"updated_at": time.Now().Unix(),
 	}); err != nil {
 		return helpers.Error(helpers.ErrSystem, err)
 	}
@@ -42,8 +42,8 @@ func (p *PasswordReset) Do() error {
 	userDao := dao.NewUser()
 
 	if err := userDao.UpdateByID(p.ID, yiigo.X{
-		"password":  defaultPass,
-		"update_at": time.Now().Unix(),
+		"password":   defaultPass,
+		"updated_at": time.Now().Unix(),
 	}); err != nil {
 		return helpers.Error(helpers.ErrSystem, err)
 	}
