@@ -15,7 +15,7 @@ FROM scratch
 WORKDIR /data
 
 COPY --from=builder /goadmin/bin/main .
-COPY --from=builder /goadmin/cmd/asserts ./asserts
+COPY --from=builder /goadmin/cmd/assets ./assets
 COPY --from=builder /goadmin/cmd/html ./html
 
 EXPOSE 8000
