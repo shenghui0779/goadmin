@@ -1,0 +1,30 @@
+{{ define "css" }}{{ end }}
+
+{{ define "breadcrumb" }}{{ end }}
+
+{{ define "content" }}
+<div class="alert alert-success" role="alert">
+    <i class="bi bi-emoji-smile"></i> welcome to goadmin
+</div>
+<ul class="list-group">
+    <li class="list-group-item text-success"><i class="bi bi-pc-display-horizontal"></i> 服务器信息</i></li>
+    <li class="list-group-item">操作系统
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>{{ .os }}</code></li>
+    <li class="list-group-item">CPU架构
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>{{ .arch }}</code></li>
+    <li class="list-group-item">CPU核数
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>{{ .cpu }}</code></li>
+    <li class="list-group-item">&nbsp;&nbsp;Go版本
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>{{ .go }}</code></li>
+    <li class="list-group-item">程序版本
+        &nbsp;&nbsp;&nbsp;&nbsp;<code>{{ .version }}</code></li>
+</ul>
+{{ end }}
+
+{{ define "js" }}
+<script type="text/javascript" src="/assets/js/home.js?v={{ .version }}"></script>
+{{ end }}
+
+{{ define "home" }}
+{{ template "main" . }}
+{{ end }}

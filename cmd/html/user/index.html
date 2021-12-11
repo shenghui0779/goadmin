@@ -1,0 +1,48 @@
+{{ define "css" }}{{ end }}
+
+{{ define "breadcrumb" }}
+<el-breadcrumb separator="/" class="mb-3">
+    <el-breadcrumb-item><a href="/">首页</a></el-breadcrumb-item>
+    <el-breadcrumb-item>用户</el-breadcrumb-item>
+</el-breadcrumb>
+{{ end }}
+
+{{ define "content" }}
+{{ template "search" . }}
+
+<div class="card table-card mb-3">
+    <div class="card-body" v-loading="loading.search">
+        <el-table :data="list.data" border>
+            <el-table-column prop="id" label="#"></el-table-column>
+            <el-table-column prop="name" label="用户名"></el-table-column>
+            <el-table-column prop="email" label="邮箱"></el-table-column>
+            <el-table-column prop="role_name" label="角色"></el-table-column>
+            <el-table-column prop="registed_at" label="注册时间"></el-table-column>
+            <el-table-column prop="last_login_at" label="最近登录时间"></el-table-column>
+            <el-table-column fixed="right" label="操作" width="300">
+                <template slot-scope="scope">
+                    <el-button type="primary" size="mini" plain @click="edit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button type="warning" size="mini" plain @click="reset(scope.$index, scope.row)">重置密码</el-button>
+                    <el-button type="danger" size="mini" plain @click="del(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+    <div class="card-footer">
+        <el-pagination v-if="list.total > 0" background @size-change="sizeChange" @current-change="query"
+            :current-page="search.page" :page-sizes="[10, 20, 50, 100]" :page-size="search.size"
+            layout="total, sizes, prev, pager, next, jumper" :total="list.total"></el-pagination>
+    </div>
+</div>
+
+{{ template "add" . }}
+{{ template "edit" . }}
+{{ end }}
+
+{{ define "js" }}
+<script type="text/javascript" src="/assets/js/user.js?v={{ .version }}"></script>
+{{ end }}
+
+{{ define "user" }}
+{{ template "main" . }}
+{{ end }}

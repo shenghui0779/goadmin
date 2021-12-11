@@ -1,0 +1,79 @@
+{{ define "main" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title>GoAdmin</title>
+
+    <link type="text/css" href="/assets/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/lib/bootstrap/bootstrap-icons.min.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/lib/element-ui/index.css" rel="stylesheet" />
+    <link type="text/css" href="/assets/css/common.css" rel="stylesheet">
+    {{ template "css" . }}
+    <link type="text/css" href="/assets/css/site.css?v={{ .version }}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" class="app" v-loading.fullscreen="loading.app">
+        <el-container>
+            <!-- Sidebar -->
+            {{ template "nav" . }}
+            <!-- Sidebar -->
+            <!-- Page Content -->
+            <el-container>
+                <el-header class="text-center">
+                    <a href="javascript:void(0);" class="menu-toggle float-left text-info" @click="menuToggle">
+                        <i class="bi bi-text-indent-left" style="font-size: 1.5rem;" v-if="collapse"></i>
+                        <i class="bi bi-text-indent-right" style="font-size: 1.5rem;" v-else></i>
+                    </a>
+                    <span class="text-success">GoAdmin</span>
+                    <div class="float-right">
+                        <el-dropdown trigger="click">
+                            <a href="javascript:void(0);" class="el-dropdown-link cursor">
+                                <i class="bi bi-person-circle"></i> {{ .identity.Name }}
+                            </a>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>
+                                    <a href="/password">
+                                        <i class="bi bi-gear"></i>设置
+                                    </a>
+                                </el-dropdown-item>
+                                <el-dropdown-item><a href="/logout"><i class="bi bi-box-arrow-right"></i>注销</a>
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
+                </el-header>
+
+                <el-main>
+                    <!-- Breadcrumbs-->
+                    {{ template "breadcrumb" . }}
+                    <!-- Content -->
+                    {{ template "content" . }}
+                </el-main>
+            </el-container>
+            <!-- Page Content -->
+        </el-container>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script type="text/javascript" src="/assets/lib/vue.min.js"></script>
+    <script type="text/javascript" src="/assets/lib/element-ui/index.js"></script>
+    <script type="text/javascript" src="/assets/lib/axios/axios.min.js"></script>
+    <!-- Common scripts -->
+    <script type="text/javascript">
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    </script>
+    {{ template "js" . }}
+</body>
+
+</html>
+{{ end }}

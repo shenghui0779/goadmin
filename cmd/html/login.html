@@ -1,0 +1,40 @@
+{{ define "css" }}
+<link type="text/css" href="/assets/css/login.css?v={{ .version }}" rel="stylesheet" />
+{{ end }}
+
+{{ define "content" }}
+<div class="row">
+	<div class="col-md-4 mx-auto">
+		<div class="card login-card">
+			<div class="card-header text-success bg-white text-center">
+				<i class="bi bi-door"></i> 欢迎登录GoAdmin
+			</div>
+			<div class="card-body pl-5 pr-5">
+				<form>
+					<div class="form-group">
+						<el-input v-model="login.account" placeholder="用户名"></el-input>
+					</div>
+					<div class="form-group">
+						<el-input type="password" v-model="login.password" placeholder="密码"></el-input>
+					</div>
+					<div class="form-group has-feedback">
+						<el-input v-model="login.captcha" placeholder="验证码"></el-input>
+						<img :src="captcha" class="captcha" title="看不清？点击换一张" alt="" @click="refreshCaptcha">
+					</div>
+					<el-button type="primary" class="btn-block" @click="submit"><i class="fas fa-key"></i> 登录
+					</el-button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+<script type="text/javascript" src="/assets/js/canvas.js"></script>
+<script type="text/javascript" src="/assets/js/login.js?v={{ .version }}"></script>
+{{ end }}
+
+{{ define "login" }}
+{{ template "normal" . }}
+{{ end }}
