@@ -34,7 +34,7 @@ CREATE TABLE `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `email` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `password` varchar(256) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `password` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `salt` varchar(16) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `role` tinyint unsigned NOT NULL DEFAULT '0',
   `registed_at` bigint NOT NULL DEFAULT '0',
