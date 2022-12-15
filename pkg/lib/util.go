@@ -1,28 +1,34 @@
-package helpers
+package lib
 
 import (
-	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"goadmin/pkg/logger"
-	"runtime/debug"
+	"io"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"
 )
 
-// Recover recover panic
-func Recover(ctx context.Context) {
-	if err := recover(); err != nil {
-		logger.Err(ctx, "Server Panic",
-			zap.Any("error", err),
-			zap.ByteString("stack", debug.Stack()),
-		)
-	}
-}
+var CaptchaDriver base64Captcha.Driver = base64Captcha.NewDriverString(
+	39,
+	120,
+	0,
+	base64Captcha.OptionShowHollowLine,
+	4,
+	base64Captcha.TxtNumbers+base64Captcha.TxtAlphabet,
+	nil,
+	nil,
+	nil,
+)
 
-// CtxCopyWithReqID returns a new context with request_id from origin context.
-func CtxCopyWithReqID(ctx context.Context) context.Context {
-	return context.WithValue(context.Background(), logger.RequestIDKey, logger.GetReqID(ctx))
+func Nonce() string {
+	nonce := make([]byte, 8)
+	io.ReadFull(rand.Reader, nonce)
+
+	return hex.EncodeToString(nonce)
 }
 
 func URLParamInt(c *gin.Context, key string) int64 {
@@ -59,8 +65,4 @@ func URLQueryInt(c *gin.Context, key string) int64 {
 	}
 
 	return v
-}
-
-func Identity() {
-
 }

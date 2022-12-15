@@ -1,7 +1,9 @@
 package result
 
+const CodeOK = 0
+
 func OK(options ...ResultOption) Result {
-	return New(0, "OK", options...)
+	return New(CodeOK, "OK", options...)
 }
 
 func ErrParams(options ...ResultOption) Result {

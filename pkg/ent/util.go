@@ -4,8 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"goadmin/pkg/logger"
 	"runtime/debug"
+
+	cfg "goadmin/pkg/config"
+	"goadmin/pkg/logger"
 
 	"entgo.io/ent/dialect"
 	"github.com/shenghui0779/yiigo"
@@ -17,15 +19,15 @@ var DB *Client
 
 func InitDB() {
 	DB = NewClient(Driver(dialect.DebugWithContext(yiigo.EntDriver(), func(ctx context.Context, v ...interface{}) {
-		logger.Info(ctx, "SQL info", zap.String("SQL", fmt.Sprint(v...)))
+		if cfg.ENV.Debug {
+			logger.Info(ctx, "SQL info", zap.String("SQL", fmt.Sprint(v...)))
+		}
 	})))
 }
 
-type TxHandler func(ctx context.Context, tx *Tx) error
-
 // Transaction Executes ent transaction with callback function.
 // The provided context is used until the transaction is committed or rolledback.
-func Transaction(ctx context.Context, callback TxHandler) error {
+func Transaction(ctx context.Context, f func(ctx context.Context, tx *Tx) error) error {
 	tx, err := DB.Tx(ctx)
 
 	if err != nil {
@@ -34,13 +36,13 @@ func Transaction(ctx context.Context, callback TxHandler) error {
 
 	defer func() {
 		if r := recover(); r != nil {
-			logger.Err(ctx, "ent transaction handler panic", zap.Any("error", r), zap.ByteString("stack", debug.Stack()))
+			logger.Err(ctx, "ent transaction panic", zap.Any("error", r), zap.ByteString("stack", debug.Stack()))
 
 			rollback(ctx, tx)
 		}
 	}()
 
-	if err = callback(ctx, tx); err != nil {
+	if err = f(ctx, tx); err != nil {
 		rollback(ctx, tx)
 
 		return err

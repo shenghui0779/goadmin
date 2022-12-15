@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"goadmin/pkg/config"
-	"goadmin/pkg/console"
 	"goadmin/pkg/ent"
 	"goadmin/pkg/html"
 	"goadmin/pkg/middlewares"
@@ -14,52 +14,42 @@ import (
 	"time"
 
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/shenghui0779/yiigo"
-	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 )
 
 var envFile string
 
 func main() {
-	app := &cli.App{
-		Name:     "goadmin",
-		Usage:    "go web project template",
-		Commands: console.Commands,
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:        "envfile",
-				Aliases:     []string{"E"},
-				Value:       ".env",
-				Usage:       "设置配置文件，默认：.env",
-				Destination: &envFile,
-			},
-		},
-		Before: func(c *cli.Context) error {
-			yiigo.LoadEnv(yiigo.WithEnvFile(envFile))
+	flag.StringVar(&envFile, "envfile", ".env", "设置ENV配置文件")
 
-			yiigo.Init(
-				yiigo.WithMySQL(yiigo.Default, config.DB()),
-				yiigo.WithLogger(yiigo.Default, config.Logger()),
-			)
+	flag.Parse()
 
-			ent.InitDB()
-			session.Start()
+	yiigo.LoadEnv(yiigo.WithEnvFile(envFile), yiigo.WithEnvWatcher(func(e fsnotify.Event) {
+		yiigo.Logger().Info("env change ok", zap.String("event", e.String()))
+		config.RefreshENV()
+	}))
 
-			return nil
-		},
-		Action: func(c *cli.Context) error {
-			serving()
+	yiigo.Init(
+		yiigo.WithMySQL(yiigo.Default, config.DB()),
+		yiigo.WithLogger(yiigo.Default, config.Logger()),
+	)
 
-			return nil
-		},
+	config.RefreshENV()
+	ent.InitDB()
+
+	// make sure we have a working tempdir in minimal containers, because:
+	// os.TempDir(): The directory is neither guaranteed to exist nor have accessible permissions.
+	if err := os.MkdirAll(os.TempDir(), 0775); err != nil {
+		yiigo.Logger().Error("err create temp dir", zap.Error(err))
 	}
 
-	if err := app.Run(os.Args); err != nil {
-		yiigo.Logger().Fatal("app running error", zap.Error(err))
-	}
+	session.Start()
+
+	serving()
 }
 
 func serving() {

@@ -2,16 +2,16 @@ package service
 
 import (
 	"errors"
+	"time"
+
 	"goadmin/pkg/consts"
 	"goadmin/pkg/ent"
 	"goadmin/pkg/ent/predicate"
 	"goadmin/pkg/ent/user"
-	"goadmin/pkg/helpers"
+	"goadmin/pkg/lib"
 	"goadmin/pkg/logger"
 	"goadmin/pkg/result"
-	"goadmin/pkg/service/lib"
 	"goadmin/pkg/session"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/shenghui0779/yiigo"
@@ -194,7 +194,7 @@ func (u *users) Create(c *gin.Context) {
 		return
 	}
 
-	salt := lib.GenSalt()
+	salt := lib.Nonce()
 
 	_, err = ent.DB.User.Create().
 		SetName(params.Name).
@@ -237,7 +237,7 @@ func (u *users) Update(c *gin.Context) {
 	}
 
 	ctx := c.Request.Context()
-	uid := helpers.URLParamInt(c, "uid")
+	uid := lib.URLParamInt(c, "uid")
 
 	_, err := ent.DB.User.Query().Unique(false).Where(user.ID(uid), user.DeletedAt(0)).First(ctx)
 
@@ -273,7 +273,7 @@ func (u *users) Delete(c *gin.Context) {
 	}
 
 	ctx := c.Request.Context()
-	uid := helpers.URLParamInt(c, "uid")
+	uid := lib.URLParamInt(c, "uid")
 
 	_, err := ent.DB.User.Query().Unique(false).Where(user.ID(uid), user.DeletedAt(0)).First(ctx)
 

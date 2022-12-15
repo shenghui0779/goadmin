@@ -1,7 +1,6 @@
 package result
 
 import (
-	"fmt"
 	"goadmin/pkg/logger"
 	"net/http"
 
@@ -9,25 +8,15 @@ import (
 )
 
 type response struct {
-	code int
-	err  error
-	data interface{}
+	Code  int         `json:"code"`
+	Err   bool        `json:"err"`
+	Msg   string      `json:"msg"`
+	ReqID string      `json:"req_id"`
+	Data  interface{} `json:"data,omitempty"`
 }
 
 func (resp *response) JSON(c *gin.Context) {
-	obj := gin.H{
-		"code": resp.code,
-		"err":  false,
-		"msg":  fmt.Sprintf("[%s] %s", logger.GetReqID(c.Request.Context()), resp.err.Error()),
-	}
+	resp.ReqID = logger.GetReqID(c.Request.Context())
 
-	if resp.code != 0 {
-		obj["err"] = true
-	}
-
-	if resp.data != nil {
-		obj["data"] = resp.data
-	}
-
-	c.JSON(http.StatusOK, obj)
+	c.JSON(http.StatusOK, resp)
 }

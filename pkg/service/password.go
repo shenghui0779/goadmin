@@ -2,15 +2,15 @@ package service
 
 import (
 	"errors"
+	"time"
+
 	"goadmin/pkg/consts"
 	"goadmin/pkg/ent"
 	"goadmin/pkg/ent/user"
-	"goadmin/pkg/helpers"
+	"goadmin/pkg/lib"
 	"goadmin/pkg/logger"
 	"goadmin/pkg/result"
-	"goadmin/pkg/service/lib"
 	"goadmin/pkg/session"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/shenghui0779/yiigo"
@@ -58,7 +58,7 @@ func (p *password) Change(c *gin.Context) {
 	ctx := c.Request.Context()
 
 	identity := session.GetIdentity(c)
-	salt := lib.GenSalt()
+	salt := lib.Nonce()
 
 	_, err := ent.DB.User.Update().Where(user.ID(identity.ID)).
 		SetPassword(yiigo.MD5(params.Password + salt)).
@@ -87,8 +87,8 @@ func (p *password) Reset(c *gin.Context) {
 
 	ctx := c.Request.Context()
 
-	uid := helpers.URLParamInt(c, "uid")
-	salt := lib.GenSalt()
+	uid := lib.URLParamInt(c, "uid")
+	salt := lib.Nonce()
 
 	_, err := ent.DB.User.Update().Where(user.ID(uid)).
 		SetPassword(yiigo.MD5("123456" + salt)).
