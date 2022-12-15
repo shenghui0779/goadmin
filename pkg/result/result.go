@@ -1,8 +1,8 @@
 package result
 
-import (
-	"github.com/gin-gonic/gin"
-)
+import "github.com/gin-gonic/gin"
+
+const CodeOK = 0
 
 type Result interface {
 	JSON(c *gin.Context)

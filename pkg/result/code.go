@@ -1,7 +1,5 @@
 package result
 
-const CodeOK = 0
-
 func OK(options ...ResultOption) Result {
 	return New(CodeOK, "OK", options...)
 }
